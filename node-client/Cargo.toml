@@ -1,0 +1,96 @@
+[package]
+name = "dagshield-node"
+version = "0.1.0"
+edition = "2021"
+authors = ["DAGShield Team"]
+description = "High-performance Rust node client for DAGShield decentralized AI-DePIN security network"
+license = "MIT"
+repository = "https://github.com/dagshield/node-client"
+
+[dependencies]
+# Async runtime and networking
+tokio = { version = "1.35", features = ["full"] }
+tokio-tungstenite = "0.21"
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+hyper = { version = "1.0", features = ["full"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# Serialization and data handling
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bincode = "1.3"
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+# Blockchain and crypto
+ethers = { version = "2.0", features = ["rustls", "ws"] }
+alloy = { version = "0.1", features = ["full"] }
+secp256k1 = { version = "0.28", features = ["rand-std"] }
+sha3 = "0.10"
+blake3 = "1.5"
+
+# DAG and parallel processing
+rayon = "1.8"
+crossbeam = "0.8"
+dashmap = "5.5"
+parking_lot = "0.12"
+
+# AI/ML integration
+candle-core = "0.3"
+candle-nn = "0.3"
+candle-transformers = "0.3"
+ort = "1.16" # ONNX Runtime for AI models
+
+# Database and storage
+sled = "0.34"
+rocksdb = "0.21"
+
+# Monitoring and metrics
+prometheus = "0.13"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+metrics = "0.22"
+metrics-exporter-prometheus = "0.13"
+
+# Configuration and environment
+config = "0.14"
+dotenv = "0.15"
+clap = { version = "4.4", features = ["derive"] }
+
+# Energy monitoring
+sysinfo = "0.30"
+battery = "0.7"
+
+# Networking and P2P
+libp2p = { version = "0.53", features = ["tcp", "mdns", "noise", "yamux", "gossipsub", "kad"] }
+
+# Error handling and utilities
+anyhow = "1.0"
+thiserror = "1.0"
+log = "0.4"
+env_logger = "0.10"
+
+# Time and scheduling
+chrono = { version = "0.4", features = ["serde"] }
+cron = "0.12"
+
+[dev-dependencies]
+tempfile = "3.8"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "dag_processing"
+harness = false
+
+[[bench]]
+name = "threat_detection"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 1

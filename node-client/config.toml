@@ -1,0 +1,45 @@
+# DAGShield Node Configuration
+
+[node]
+stake_amount = 100000000000000000000  # 100 tokens in wei
+reputation_threshold = 70
+max_concurrent_tasks = 8
+heartbeat_interval_secs = 30
+challenge_timeout_secs = 3600
+
+[blockchain]
+rpc_url = "http://localhost:8545"
+chain_id = 1337
+contract_address = "0x0000000000000000000000000000000000000000"
+private_key = ""  # Set via environment variable
+gas_limit = 500000
+gas_price_gwei = 20
+
+[ai]
+model_path = "./models/threat_detection.onnx"
+confidence_threshold = 0.7
+batch_size = 32
+max_sequence_length = 512
+update_interval_hours = 24
+
+[network]
+listen_port = 9000
+bootstrap_peers = []
+max_peers = 50
+discovery_interval_secs = 60
+
+[storage]
+data_dir = "./data"
+max_db_size_gb = 10
+backup_interval_hours = 6
+
+[energy]
+monitoring_enabled = true
+target_efficiency_score = 80
+power_limit_watts = 100.0
+carbon_tracking_enabled = true
+
+[metrics]
+enabled = true
+port = 9090
+export_interval_secs = 60
